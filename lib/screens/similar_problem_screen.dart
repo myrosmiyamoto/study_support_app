@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 // Flutterの基本UI（ボタンやテキストなど）を使うため
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 // カメラで写真を撮る／ギャラリーから選ぶためのパッケージ（image_picker）
 import 'package:image_picker/image_picker.dart';
 // HTTP通信用のパッケージ（API呼び出しに使用）
@@ -69,10 +70,13 @@ class _SimilarProblemScreenState extends State<SimilarProblemScreen> {
       // APIキーの取得方法：
       // flutter run のとき --dart-define=OPENAI_API_KEY=xxxxx と渡し、
       // const String.fromEnvironment で受け取る（コードに直書きしないのが安全）
-      final apiKey = const String.fromEnvironment('OPENAI_API_KEY');
+      final apiKey = dotenv.env['OPENAI_API_KEY'] ??
+          const String.fromEnvironment('OPENAI_API_KEY');
       if (apiKey.isEmpty) {
         // キーが設定されていない場合は例外にして catch へ
-        throw Exception('OPENAI_API_KEY が未設定です（--dart-define で渡してください）。');
+        throw Exception(
+          'OPENAI_API_KEY が未設定です（.env または --dart-define で渡してください）。',
+        );
       }
 
       // === API のエンドポイントとヘッダ ===

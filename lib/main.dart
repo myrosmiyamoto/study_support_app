@@ -1,5 +1,6 @@
 // Flutterの基本パッケージを読み込み（アプリ画面を作るために必要）
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 // Google Fonts パッケージを使って、日本語フォント（Noto Sans JP）を利用するため
 import 'package:google_fonts/google_fonts.dart';
@@ -11,7 +12,9 @@ import 'screens/similar_problem_screen.dart';
 
 // アプリのスタート地点（main関数）
 // runApp() に自分のアプリのクラス（StudySupportApp）を渡す
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: '.env');
   runApp(const StudySupportApp());
 }
 
