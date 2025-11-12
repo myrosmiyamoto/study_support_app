@@ -92,7 +92,7 @@ class _SimilarProblemScreenState extends State<SimilarProblemScreen> {
 
       // === リクエストボディ（messages に「テキスト＋画像（data URL）」を渡す） ===
       final body = {
-        'model': 'gpt-5', // Vision 対応の最新モデル（必要に応じて更新）
+        'model': 'gpt-4o-mini', // Vision 対応の最新モデル（必要に応じて更新）
         'messages': [
           {
             'role': 'user',
@@ -107,7 +107,7 @@ class _SimilarProblemScreenState extends State<SimilarProblemScreen> {
             ],
           },
         ],
-        // 'temperature': 0.2, // 出力のランダム性（必要なら調整）
+        'temperature': 0.2, // 出力のランダム性（必要なら調整）
       };
 
       // === HTTP POST で送信 ===
